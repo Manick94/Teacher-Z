@@ -1,0 +1,40 @@
+# Teacher-Z — Python dependencies
+# Core API
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+python-multipart==0.0.9
+aiofiles==23.2.1
+
+# Auth
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+bcrypt==4.0.1            # passlib is not compatible with bcrypt>=4.1 (strict 72-byte limit)
+
+# Database
+SQLAlchemy==2.0.28
+alembic==1.13.1
+
+# Config
+pydantic[email]==2.6.3
+pydantic-settings==2.2.1
+python-dotenv==1.0.1
+
+# Image processing
+Pillow==10.2.0
+
+# HTTP client (for Ollama backend)
+httpx==0.27.0
+
+# Testing
+pytest==8.0.2
+pytest-asyncio==0.23.5
+httpx==0.27.0
+
+# --- AI / ML dependencies (optional — app falls back gracefully if missing) ---
+# Uncomment these for full local AI inference. They are heavy (2-5 GB download).
+# For free-tier cloud deployment, leave commented and rely on stub/Ollama providers.
+
+# torch==2.2.1               # CPU-only: pip install torch --index-url https://download.pytorch.org/whl/cpu
+# transformers==4.38.2
+# accelerate==0.27.2
+# onnxruntime==1.17.1

@@ -1,0 +1,40 @@
+# Fly.io deployment configuration for Teacher-Z
+# Deploy: fly launch (first time) or fly deploy (subsequent)
+
+app = "teacher-z-api"
+primary_region = "iad"
+
+[build]
+
+[env]
+  PORT = "8080"
+  ENV = "production"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 25
+    soft_limit = 20
+
+[[vm]]
+  memory = "512mb"
+  cpu_kind = "shared"
+  cpus = 1
+
+# Persistent volume for SQLite + dataset storage
+[[mounts]]
+  source = "teacherz_data"
+  destination = "/app/data"
+  initial_size = "1gb"
+
+# Health check
+[[services.tcp_checks]]
+  interval = "10s"
+  timeout = "2s"
+  grace_period = "5s"
